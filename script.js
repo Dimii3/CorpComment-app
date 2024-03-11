@@ -69,3 +69,33 @@ const submitHandler = (e) => {
 formEl.addEventListener("submit", (e) => {
   submitHandler(e);
 });
+
+fetch("https://bytegrad.com/course-assets/js/1/api/feedbacks")
+  .then((res) => res.json())
+  .then(({ feedbacks }) => {
+    feedbacks.forEach(
+      ({ company, badgeLetter, upvoteCount, daysAgo, text }) => {
+        const feedbackItem = `<li class="feedback">
+  <button class="upvote">
+      <i class="fa-solid fa-caret-up upvote__icon"></i>
+      <span class="upvote__count">${upvoteCount}</span>
+  </button>
+  <section class="feedback__badge">
+      <p class="feedback__letter">${badgeLetter}</p>
+  </section>
+  <div class="feedback__content">
+      <p class="feedback__company">${company}</p>
+      <p class="feedback__text">${text}</p>
+  </div>
+  <p class="feedback__date">${daysAgo === 0 ? "new" : daysAgo + "d"}</p>
+</li>`;
+        feedbackList.insertAdjacentHTML("afterbegin", feedbackItem);
+      }
+    );
+    document.querySelector(".spinner").remove();
+  })
+  .catch((err) => {
+    feedbackList.innerHTML = `<small class="error-message"> Ops.. something went wrong 😯 </small>`;
+    document.querySelector(".spinner").remove();
+    console.error(err.message);
+  });

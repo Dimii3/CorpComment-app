@@ -575,6 +575,15 @@ button {
   border-left: 7px solid #ccd1d3;
   animation: spinner 1s infinite linear;
 }
+.error-message {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 14px;
+  color: rgb(228, 39, 77);
+}
 
 /* MEDIA QUERIES */
 @media (max-height: 925px) {

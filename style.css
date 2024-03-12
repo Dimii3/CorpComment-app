@@ -430,7 +430,6 @@ button {
   font-size: 13px;
   margin-top: 1px;
   transition: all 0.2s;
-
   display: -webkit-box;
   max-width: 100%;
   -webkit-line-clamp: 2;

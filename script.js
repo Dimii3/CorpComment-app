@@ -118,3 +118,18 @@ fetch(`${BASE_API_URL}/feedbacks`)
     document.querySelector(".spinner").remove();
     console.error(err.message);
   });
+
+const clickHandler = (event) => {
+  const clickedEl = event.target;
+  const upvoteIntention = clickedEl.className.includes("upvote");
+  if (upvoteIntention) {
+    const upvoteBtn = clickedEl.closest(".upvote");
+    upvoteBtn.disabled = true;
+    const upvoteCountEl = upvoteBtn.querySelector(".upvote__count");
+    let upvoteCountNumber = +upvoteCountEl.textContent++;
+  } else {
+    clickedEl.closest(".feedback").classList.toggle("feedback--expand");
+  }
+};
+
+feedbackList.addEventListener("click", clickHandler);

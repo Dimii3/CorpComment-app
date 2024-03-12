@@ -5,6 +5,7 @@ const textareaEl = document.querySelector(".form__textarea");
 const counterNum = document.querySelector(".counter");
 const feedbackList = document.querySelector(".feedbacks");
 const submitBtn = document.querySelector(".submit-btn");
+const hashtagsList = document.querySelector(".hashtags");
 // FORM
 const formEl = document.querySelector(".form");
 
@@ -133,3 +134,20 @@ const clickHandler = (event) => {
 };
 
 feedbackList.addEventListener("click", clickHandler);
+
+const hashFilter = (event) => {
+  const clickedEl = event.target;
+  if (clickedEl.className.includes("hashtags")) return;
+
+  const selectedHash = clickedEl.textContent.substring(1).toLowerCase().trim();
+  const allExistingHash = [...feedbackList.children].forEach((item) => {
+    item.style.display = "grid";
+    const companyHashs = item
+      .querySelector(".feedback__company")
+      .textContent.toLowerCase()
+      .trim();
+    if (selectedHash !== companyHashs) item.style.display = "none";
+  });
+};
+
+hashtagsList.addEventListener("click", hashFilter);
